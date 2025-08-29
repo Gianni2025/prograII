@@ -28,12 +28,3 @@ class WeatherData(Subject):
         self._pressure = pressure
         self.measurements_changed()
 
-    # Getters (opcional, para el modelo Pull)
-    def get_temperature(self) -> float:
-        return self._temperature
-
-    def get_humidity(self) -> float:
-        return self._humidity
-
-    def get_pressure(self) -> float:
-        return self._pressure
