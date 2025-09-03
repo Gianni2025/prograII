@@ -1,146 +1,115 @@
-# INFORME TP DECORADOR GRUPO 5 -- Starbuzz Coffee
+# Informe de Implementación - Patrón Decorator
 
-El programa ya armado incluía la siguiente salida
+**Realizado por:**
+
+* Gianni Bevilacqua
+* Javier Spina
+* Fabiana Fulgenzi
+* Gerardo Toboso
+
+## Decisiones de Diseño
+
+### 1. Propagación de Tamaños
+
+La implementación del sistema de tamaños siguió el principio de **no duplicar estado**, asegurando que la información del tamaño se mantenga centralizada en la bebida base:
+
+- **En la clase `Beverage`**: Se agregaron los métodos `set_size()`, `get_size()` y `get_available_sizes()` con validación de tamaños válidos (`["Tall", "Grande", "Venti"]`).
+
+- **En `CondimentDecorator`**: Los decoradores obtienen el tamaño de la bebida envuelta mediante `self.size = beverage.get_size()` en el constructor, manteniendo una referencia al tamaño actual sin duplicar la lógica de validación.
+
+- **Propagación de cambios**: Cuando se modifica el tamaño de una bebida decorada, el cambio se propaga automáticamente a través de la cadena de decoradores, ya que todos consultan la misma fuente (la bebida base).
+
+### 2. Precios Dependientes del Tamaño
+
+Se implementó un sistema de precios variables para el condimento **Soy**, donde el costo depende del tamaño de la bebida:
+
+```python
+# En la clase Soy
+def cost(self) -> float:
+    costo = [0.10, 0.15, 0.20]  # Tall, Grande, Venti
+    if self.size == "Tall":
+        return self._beverage.cost() + costo[0]
+    elif self.size == "Grande":
+        return self._beverage.cost() + costo[1]
+    else:
+        return self._beverage.cost() + costo[2]
 ```
-Bienvenido a Starbuzz Coffee!
---- Preparando pedidos ---
-   Pedido 1: Espresso $1.99
-   Pedido 2: Café Dark Roast, Mocha, Mocha, Crema $1.49
-   Pedido 3: Café de la Casa, Soja, Mocha, Crema $1.34
+
+Esta implementación:
+
+- Consulta el tamaño de la bebida envuelta
+- Aplica el precio correspondiente sin modificar la lógica de otras clases
+- Respeta el principio Open-Closed (OCP)
+
+### 3. Sistema Builder para Usabilidad
+
+Se implementó un patrón Builder (`BeverageBuilder`) para simplificar la construcción de bebidas complejas:
+
+- **Uso de reflexión**: Se utilizan `__subclasses__()` para obtener dinámicamente las clases disponibles de bebidas y condimentos
+- **Interfaz fluida**: Método `add_condiment()` que retorna `self` para permitir encadenamiento
+- **Función de conveniencia**: `build_beverage(base, size, condiments)` que encapsula la lógica de construcción
+
+### 4. Pretty Print para Presentación
+
+Se desarrolló una función `pretty_print()` que mejora la legibilidad de las descripciones:
+
+- **Detección de repeticiones**: Identifica condimentos duplicados en la descripción
+- **Formateo inteligente**: Convierte "Mocha, Mocha" en "Double Mocha" y "Mocha, Mocha, Mocha" en "Triple Mocha"
+- **Escalabilidad**: Para más de 3 repeticiones utiliza formato "nx Condimento"
+- **No invasiva**: Opera solo a nivel de presentación sin afectar la lógica de cálculo de costos
+
+## Estrategia de Testing
+
+### Organización de Tests
+
+Los tests se organizaron en 3 archivos especializados:
+
+1. **`test_beverages.py`**: Tests para funcionalidad básica de bebidas y tamaños
+2. **`test_condiments.py`**: Tests para decoradores y combinaciones complejas
+3. **`test_pretty_print.py`**: Tests para funcionalidad de formateo
+
+### Cobertura de Casos
+
+- **Tests parametrizados**: Se utilizó `@pytest.mark.parametrize` para probar múltiples combinaciones eficientemente
+- **Casos edge**: Tests para decoradores anidados profundamente y propagación de propiedades
+- **Integridad del patrón**: Verificación de que las bebidas decoradas mantienen la interfaz `Beverage`
+- **Validación de costos**: Tests específicos para asegurar que los cálculos de precios son correctos
+
+### Validación de Totales
+
+Los tests incluyen verificaciones exhaustivas de cálculos:
+
+```python
+def test_complex_combination_should_calculate_correctly_when_multiple_condiments_applied(self):
+    house_blend = HouseBlend(size="Tall")
+    complex_drink = Whip(Mocha(Soy(house_blend)))
+    
+    expected_cost = 0.89 + 0.10 + 0.20 + 0.10  # 1.29
+    assert complex_drink.cost() == expected_cost
 ```
 
----
-  
-##  Trabajo Práctico (TP) — Consignas y entregables
-  
-   Se trabaja en repositorio https://github.com/Gianni2025/prograII
-   Dentro de la carpeta Tabajo_propio/decorador
+## Cumplimiento de Principios
 
-### Nivel 1 — Calentamiento     
-1. **Nuevo condimento**: implementar `Caramel` (Caramelo) con un costo fijo (p. ej., `$0.20`).  
-- Actualizar `get_description()` y `cost()` como en `Mocha`.  
-- Demostrar en `main.py` un pedido con Caramelo.
+### Open-Closed Principle (OCP)
 
-   En condiments.py se sumo el "Condimento Concreto" Caramel
-   ```
-   class Caramel(CondimentDecorator):
-   """
-      Decorador para añadir Caramelo a una bebida.
-   """
-   def get_description(self) -> str:
-   return self._beverage.get_description() + ", Caramelo"
+- **Extensión sin modificación**: Se agregó el condimento `Caramel` sin modificar clases existentes
+- **Nuevas funcionalidades**: Builder y Pretty Print se implementaron como módulos separados
+- **Precios por tamaño**: Solo se modificó la clase `Soy` para implementar precios variables
 
-   def cost(self) -> float:
-   return self._beverage.cost() + 0.20
-   ```
-   Se agregó un archivo tests.py para agregar los testeos de las nuevas implementaciones, el Test1 muestra una expreso + caramel  y un expreso + caramel + whip, para verificar que tanto su uso solo como en combinación con otros condimentos es incorporado correctamente
+### Composición sobre Herencia
 
+- **Delegación efectiva**: Cada decorador delega el trabajo principal a la bebida envuelta
+- **Flexibilidad en runtime**: Las combinaciones se construyen dinámicamente sin explosión de clases
+- **Mantenimiento del tipo**: Los decoradores mantienen la interfaz `Beverage` por herencia
 
-2. **Doble/Triple**: crear bebidas con **doble** y **triple** condimento (p. ej., *Double Mocha*). Animarse a encadenar muchas capas; confirmar que los totales se calculan bien.
+## Conclusiones
 
-   En realidadel pedido 2 ya incluído en el main.py muestra un doble mocha.
-   En varios de los test incluídos en tests.py se usa multiplicidad de un condimento.
-   Solo a modo de ejemplo:
-      En el test 1 se usa multiplicidad de Crema
-      En el test5 del archivos tests.py se muestra un Café de la casa condimentado con soja x3.
+La implementación logró cumplir con todos los requisitos del patrón Decorator manteniendo:
 
+- **Flexibilidad**: Fácil adición de nuevos condimentos y bebidas
+- **Usabilidad**: Builder pattern simplifica la construcción de bebidas complejas
+- **Presentación**: Pretty print mejora la experiencia del usuario
+- **Robustez**: Suite de tests comprehensiva asegura correctitud funcional
+- **Escalabilidad**: Arquitectura preparada para futuras extensiones sin romper código existente
 
-### Nivel 2 — Tamaños (**Tall/Grande/Venti**) y precios dependientes del tamaño
-1. Agregar a `Beverage` las operaciones `set_size(size)` y `get_size()`. 
-
-   Se agregaron los métodos. Se considera que si hay un ingreso erróneo del tamaño se toma el default 'Tall", y en la clase abstracta de 'CondimentDecorator' se agregó en el init "self.size = beverage.get_size()" para que al ir decorando la bebida mantenga el estado de tamaño.
-   En los tests 2 y 3 se verifica que aún con condimentos reconoce el tamaño seteado
-   ```
-      def set_size(self, size) -> str:
-         sizes= ["Tall", "Grande", "Venti"]
-         if size in sizes:
-               self.size = size
-         else:
-               print("Tamaño ingresado erróneo, se asume Tall")
-               
-      def get_size(self) -> str:
-         return self.size
-
-      class CondimentDecorator(Beverage, ABC):
-      """
-      Clase base para los decoradores de condimentos.
-      Hereda de Beverage para tener el mismo tipo.
-      Mantiene una referencia a la bebida que está envolviendo.
-      """
-      def __init__(self, beverage: Beverage):
-         self._beverage = beverage
-         self.size = beverage.get_size()
-   ```
-      
-
-2. Hacer que **al menos** `Soy` cobre según tamaño (p. ej., Tall 0.10, Grande 0.15, Venti 0.20) y leer el `size` del componente envuelto.  
-
-   Se modifica el metodo cost() del decorador Soy. 
-   ```
-      def cost(self) -> float:
-         # costo Tall 0.10, Grande 0.15, Venti 0.20
-         costo = [0.10, 0.15 , 0.20]
-         if self.size == "Tall":
-               return self._beverage.cost() + costo[0]
-         elif self.size == "Grande":
-               return self._beverage.cost() + costo[1]
-         else:
-               return self._beverage.cost() + costo[2]      
-   ```
-
-3. Validar con 2–3 ejemplos reales: *HouseBlend Venti + Soy*, etc.  
-   > Pista: los decoradores deben **propagar** o **consultar** el tamaño del beverage envuelto; no dupliques estado.
-
-   Se realizaron tests con distintos cafés/tamaños decorados con soja solo, con multiplicidad y en combinación con otros condimentos, verificando el correcto cálculo del precio, tests 4 a 9
-
-
-### Nivel 3 — Usabilidad y pruebas
-1. **Builder/Factory simple (opcional)**: para no escribir a mano todas las “envolturas”, crear una función tipo `build_beverage(base, size, condiments)` que devuelva el objeto ya decorado.  
-
-   Se generó el archivo builder.py, toma como opcionales tamaño (el default sigue siendo Tall) y condimentos.
-   Esta clase toma en forma automática las clases concretas de bebidas y condimentos
-
-2. **Pretty print (opcional)**: un decorador “de presentación” que transforme `"Mocha, Mocha, Whip"` en `"Double Mocha, Whip"` **solo a nivel de texto** (no cambies la lógica de `cost()`).
-
-
-   Se generó método pretty_print en beverages y condiments, 
-   en los test se agregó la impresión decorada para evaluar la funcionalidad
-
-
-3. **Testing**: escribir tests (con `pytest` o asserts) para validar costos y descripciones de 3–5 combos (incluyendo **dobles** y **tamaños**).
-
-
-
-### Entregables
-- Código fuente actualizado (`beverages.py`, `condiments.py`, `main.py`, y/o `builder.py` si lo agregás).  
-   https://github.com/Gianni2025/prograII/tree/builder-toma-las-clases-automaticamente/Trabajo_propio/decorator
-
-- Casos de prueba (mínimo 3).  
-   Primeros chequeos main y tests.py (Hasta el test 11 son funciones que chequean resultado, el test 12 usa assert)
-   En carpeta tests estan los tests realizados con pytest incluyendo un testing_guide.md para correrlos.
-
-- Un **breve informe** (puede ser en el README) explicando decisiones de diseño (cómo propagaste `size`, cómo probaste totales, etc.).
-   Informe TP Decorador.md en mismo repositorio
----
-
-## 5) Buenas prácticas y “pitfalls”
-
-- **Programa contra la abstracción** (`Beverage`), no contra tipos concretos: si tu cliente chequea el tipo concreto de la bebida (p. ej., `isinstance(..., HouseBlend)`), al decorar se puede **romper** esa lógica. Evitalo. fileciteturn3file1  
-
-   tests 13 y 14 del archivo tests.py verifica en un cafe decorado y no decorado si pertenecen a las clases bebidas/condimentos
-
-- **OCP**: para añadir un **nuevo condimento**, creá un **nuevo decorador**; **no** modifiques `Beverage` ni las bebidas existentes. 
-      Esto está hecho para Caramelo   #(O está pidiendo otra cosa)
-- **Pequeñas clases**: Decorator tiende a generar **muchas clases pequeñas**; documentá y organizá bien para mantener la comprensión. fileciteturn3file1
-   """
-    Decorador para añadir Caramelo a una bebida.
-   """
-   #Esto es suficiente???????
-
----
-
-## 6) Extensión sugerida: Decorator en I/O (paralelo con Java)
-
-El capítulo muestra cómo el paquete **java.io** usa Decorator (`InputStream` + `FilterInputStream` + `BufferedInputStream`, `ZipInputStream`, etc.). Como extensión, implementá un **wrapper** en Python para un “stream” de texto que **convierte a minúsculas** al leer, análogo a `LowerCaseInputStream`. fileciteturn3file1
-
----
+La solución demuestra un diseño sólido que balancea correctamente los principios SOLID con la practicidad de uso.
