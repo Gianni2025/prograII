@@ -20,7 +20,7 @@ class TestSingleCondiments:
     @pytest.mark.parametrize(
         "beverage_class,base_cost,base_description",
         [
-            (Espresso, 1.99, "Espresso"),
+            (Espresso, 1.99, "Café Espresso"),
             (HouseBlend, 0.89, "Café de la Casa"),
             (DarkRoast, 0.99, "Café Dark Roast"),
             (Decaf, 1.05, "Café Descafeinado"),
@@ -39,7 +39,7 @@ class TestSingleCondiments:
     @pytest.mark.parametrize(
         "beverage_class,base_cost,base_description",
         [
-            (Espresso, 1.99, "Espresso"),
+            (Espresso, 1.99, "Café Espresso"),
             (HouseBlend, 0.89, "Café de la Casa"),
             (DarkRoast, 0.99, "Café Dark Roast"),
             (Decaf, 1.05, "Café Descafeinado"),
@@ -58,7 +58,7 @@ class TestSingleCondiments:
     @pytest.mark.parametrize(
         "beverage_class,base_cost,base_description",
         [
-            (Espresso, 1.99, "Espresso"),
+            (Espresso, 1.99, "Café Espresso"),
             (HouseBlend, 0.89, "Café de la Casa"),
             (DarkRoast, 0.99, "Café Dark Roast"),
             (Decaf, 1.05, "Café Descafeinado"),
@@ -77,7 +77,7 @@ class TestSingleCondiments:
     @pytest.mark.parametrize(
         "beverage_class,base_cost,base_description",
         [
-            (Espresso, 1.99, "Espresso"),
+            (Espresso, 1.99, "Café Espresso"),
             (HouseBlend, 0.89, "Café de la Casa"),
             (DarkRoast, 0.99, "Café Dark Roast"),
             (Decaf, 1.05, "Café Descafeinado"),
@@ -113,7 +113,7 @@ class TestSoyWithSizes:
 
         expected_total = 1.99 + expected_soy_cost
         assert soy_espresso.cost() == expected_total
-        assert soy_espresso.get_description() == "Espresso, Soja"
+        assert soy_espresso.get_description() == "Café Espresso, Soja"
 
 
 # ========== TESTS DE MÚLTIPLES DECORADORES ==========
@@ -129,7 +129,7 @@ class TestMultipleDecorators:
         decorated = Mocha(Milk(Whip(espresso)))  # +0.20 +0.10 +0.10
 
         expected_cost = 1.99 + 0.20 + 0.10 + 0.10  # 2.39
-        expected_description = "Espresso, Crema, Leche, Mocha"
+        expected_description = "Café Espresso, Crema, Leche, Mocha"
 
         assert decorated.cost() == expected_cost
         assert decorated.get_description() == expected_description
@@ -140,7 +140,7 @@ class TestMultipleDecorators:
         double_mocha = Mocha(Mocha(espresso))
 
         expected_cost = 1.99 + 0.20 + 0.20  # 2.39
-        expected_description = "Espresso, Mocha, Mocha"
+        expected_description = "Café Espresso, Mocha, Mocha"
 
         assert double_mocha.cost() == expected_cost
         assert double_mocha.get_description() == expected_description
@@ -231,7 +231,7 @@ class TestDecoratorPatternIntegrity:
             current = current._beverage
 
         assert isinstance(current, Espresso)
-        assert current.get_description() == "Espresso"
+        assert current.get_description() == "Café Espresso"
 
 
 # ========== TESTS DE CASOS EDGE ==========
@@ -249,7 +249,7 @@ class TestEdgeCases:
         second_decoration = Mocha(first_decoration)
 
         assert second_decoration.cost() == 1.99 + 0.10 + 0.20
-        assert second_decoration.get_description() == "Espresso, Leche, Mocha"
+        assert second_decoration.get_description() == "Café Espresso, Leche, Mocha"
 
     def test_soy_with_venti_size_should_cost_most_when_compared_to_other_sizes(self):
         """Test que verifica que Soy con tamaño Venti es el más caro"""

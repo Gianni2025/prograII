@@ -2,13 +2,13 @@
 Testing correspondiente a la clase Beverage y sus subclases.
 """
 
-import pytest
-import sys
 import os
+import sys
+
+import pytest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from beverages import Espresso, HouseBlend, DarkRoast, Decaf, Beverage
-
+from beverages import Beverage, DarkRoast, Decaf, Espresso, HouseBlend
 
 # ========== TESTS BÁSICOS DE BEBIDAS ==========
 
@@ -19,7 +19,7 @@ class TestBeverageBasics:
     @pytest.mark.parametrize(
         "beverage_class,expected_description,expected_cost",
         [
-            (Espresso, "Espresso", 1.99),
+            (Espresso, "Café Espresso", 1.99),
             (HouseBlend, "Café de la Casa", 0.89),
             (DarkRoast, "Café Dark Roast", 0.99),
             (Decaf, "Café Descafeinado", 1.05),

@@ -1,10 +1,10 @@
-# beverages.py
-# Contiene el Componente y los Componentes Concretos del patrón.
+"""
+Módulo que contiene a las bebidas pertenecientes al café.
+""" 
 
 from abc import ABC, abstractmethod
 
 
-# --- Componente Abstracto ---
 class Beverage(ABC):
     """
     La clase base para todas las bebidas. Utiliza el módulo abc para
@@ -16,9 +16,6 @@ class Beverage(ABC):
         self.description = description
         self.size = size
 
-
-    """ def pretty_print(self)-> str:
-        return self.description """
 
     def get_description(self) -> str:
         """
@@ -59,7 +56,6 @@ class Beverage(ABC):
         pass
 
 
-# --- Componentes Concretos ---
 class HouseBlend(Beverage):
     """
     Café de la casa, un tipo específico de bebida.
@@ -102,7 +98,7 @@ class Espresso(Beverage):
     """
 
     def __init__(self):
-        super().__init__("Espresso", "Tall")
+        super().__init__("Café Espresso", "Tall")
 
     def cost(self) -> float:
         return 1.99
