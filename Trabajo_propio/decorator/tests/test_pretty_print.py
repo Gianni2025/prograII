@@ -37,7 +37,7 @@ class TestImpresionDecorada:
         self, condiment_sequence, expected_text
     ):
         """Test parametrizado para diferentes combinaciones de condimentos"""
-        espresso = Espresso()
+        espresso = Espresso(size="Tall")
         decorated = espresso
         for condiment_class in condiment_sequence:
             decorated = condiment_class(decorated)

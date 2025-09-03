@@ -30,7 +30,7 @@ class TestSingleCondiments:
         self, beverage_class, base_cost, base_description
     ):
         """Test que verifica que Milk agrega $0.10 al costo base"""
-        beverage = beverage_class()
+        beverage = beverage_class(size="Tall")
         milk_beverage = Milk(beverage)
 
         assert milk_beverage.cost() == base_cost + 0.10
@@ -49,7 +49,7 @@ class TestSingleCondiments:
         self, beverage_class, base_cost, base_description
     ):
         """Test que verifica que Mocha agrega $0.20 al costo base"""
-        beverage = beverage_class()
+        beverage = beverage_class(size="Tall")
         mocha_beverage = Mocha(beverage)
 
         assert mocha_beverage.cost() == base_cost + 0.20
@@ -68,7 +68,7 @@ class TestSingleCondiments:
         self, beverage_class, base_cost, base_description
     ):
         """Test que verifica que Whip agrega $0.10 al costo base"""
-        beverage = beverage_class()
+        beverage = beverage_class(size="Tall")
         whip_beverage = Whip(beverage)
 
         assert whip_beverage.cost() == base_cost + 0.10
@@ -87,7 +87,7 @@ class TestSingleCondiments:
         self, beverage_class, base_cost, base_description
     ):
         """Test que verifica que Caramel agrega $0.20 al costo base"""
-        beverage = beverage_class()
+        beverage = beverage_class(size="Tall")
         caramel_beverage = Caramel(beverage)
 
         assert caramel_beverage.cost() == base_cost + 0.20
@@ -107,8 +107,7 @@ class TestSoyWithSizes:
         self, size, expected_soy_cost
     ):
         """Test que verifica que Soy agrega costo según el tamaño de la bebida"""
-        espresso = Espresso()
-        espresso.set_size(size)
+        espresso = Espresso(size=size)
         soy_espresso = Soy(espresso)
 
         expected_total = 1.99 + expected_soy_cost
@@ -125,7 +124,7 @@ class TestMultipleDecorators:
     def test_multiple_condiments_should_stack_costs_when_applied_sequentially(self):
         """Test que verifica que múltiples condimentos apilan sus costos correctamente"""
         # Espresso base: $1.99
-        espresso = Espresso()
+        espresso = Espresso(size="Tall")
         decorated = Mocha(Milk(Whip(espresso)))  # +0.20 +0.10 +0.10
 
         expected_cost = 1.99 + 0.20 + 0.10 + 0.10  # 2.39
@@ -136,7 +135,7 @@ class TestMultipleDecorators:
 
     def test_double_condiment_should_double_cost_when_applied_twice(self):
         """Test que verifica que aplicar el mismo condimento dos veces duplica su costo"""
-        espresso = Espresso()
+        espresso = Espresso(size="Tall")
         double_mocha = Mocha(Mocha(espresso))
 
         expected_cost = 1.99 + 0.20 + 0.20  # 2.39
@@ -150,8 +149,7 @@ class TestMultipleDecorators:
     ):
         """Test para una combinación compleja de múltiples condimentos"""
         # HouseBlend + Soy + Mocha + Whip (como en el README)
-        house_blend = HouseBlend()
-        house_blend.set_size("Tall")  # Soy Tall = +0.10
+        house_blend = HouseBlend(size="Tall")
         complex_drink = Whip(Mocha(Soy(house_blend)))
 
         expected_cost = 0.89 + 0.10 + 0.20 + 0.10  # 1.29
@@ -175,7 +173,7 @@ class TestMultipleDecorators:
         self, condiment_sequence, expected_addition
     ):
         """Test parametrizado para diferentes combinaciones de condimentos"""
-        espresso = Espresso()
+        espresso = Espresso(size="Tall")
         decorated = espresso
 
         # Aplicar condimentos en secuencia
@@ -196,7 +194,7 @@ class TestDecoratorPatternIntegrity:
         """Test que verifica que las bebidas decoradas mantienen la interfaz Beverage"""
         from beverages import Beverage
 
-        espresso = Espresso()
+        espresso = Espresso(size="Tall")
         decorated = Mocha(Milk(espresso))
 
         # Debe seguir siendo una instancia de Beverage
@@ -210,7 +208,7 @@ class TestDecoratorPatternIntegrity:
 
     def test_size_should_propagate_correctly_when_beverage_is_decorated(self):
         """Test que verifica que el tamaño se propaga correctamente en bebidas decoradas"""
-        espresso = Espresso()
+        espresso = Espresso(size="Tall")
         espresso.set_size("Grande")
 
         decorated = Mocha(Milk(espresso))
@@ -222,7 +220,7 @@ class TestDecoratorPatternIntegrity:
         self,
     ):
         """Test que verifica que los decoradores anidados mantienen referencia a la bebida original"""
-        espresso = Espresso()
+        espresso = Espresso(size="Tall")
         deeply_decorated = Caramel(Whip(Mocha(Milk(espresso))))
 
         # Debería poder acceder a la bebida original a través de la cadena
@@ -244,7 +242,7 @@ class TestEdgeCases:
         self,
     ):
         """Test que verifica que se puede decorar una bebida ya decorada"""
-        espresso = Espresso()
+        espresso = Espresso(size="Tall")
         first_decoration = Milk(espresso)
         second_decoration = Mocha(first_decoration)
 
@@ -253,16 +251,14 @@ class TestEdgeCases:
 
     def test_soy_with_venti_size_should_cost_most_when_compared_to_other_sizes(self):
         """Test que verifica que Soy con tamaño Venti es el más caro"""
-        espresso_tall = Espresso()
-        espresso_tall.set_size("Tall")
+        espresso_tall = Espresso(size="Tall")
         soy_tall = Soy(espresso_tall)
 
-        espresso_grande = Espresso()
-        espresso_grande.set_size("Grande")
+        espresso_grande = Espresso(size="Grande")
         soy_grande = Soy(espresso_grande)
 
-        espresso_venti = Espresso()
-        espresso_venti.set_size("Venti")
+        espresso_venti = Espresso(size="Venti")
         soy_venti = Soy(espresso_venti)
 
         assert soy_venti.cost() > soy_grande.cost() > soy_tall.cost()
+

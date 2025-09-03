@@ -25,7 +25,7 @@ class BeverageBuilder:
     def __init__(self, beverage: str, size: Optional[str]) -> None:
         if beverage not in self.BEVERAGES:
             raise ValueError(f"Esa bebida: {beverage} no existe.")
-        self.beverage = self.BEVERAGES[beverage]()
+        self.beverage = self.BEVERAGES[beverage](size)
         if size:
             if size not in self.SIZES:
                 raise ValueError(f"Ese tamaño: {size} no existe.")

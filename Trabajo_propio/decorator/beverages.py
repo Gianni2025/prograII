@@ -61,8 +61,8 @@ class HouseBlend(Beverage):
     Café de la casa, un tipo específico de bebida.
     """
 
-    def __init__(self):
-        super().__init__("Café de la Casa", "Tall")
+    def __init__(self, size: str):
+        super().__init__("Café de la Casa", size)
 
     def cost(self) -> float:
         return 0.89
@@ -73,8 +73,8 @@ class DarkRoast(Beverage):
     Café Dark Roast, un tipo específico de bebida.
     """
 
-    def __init__(self):
-        super().__init__("Café Dark Roast", "Tall")
+    def __init__(self, size: str):
+        super().__init__("Café Dark Roast", size)
 
     def cost(self) -> float:
         return 0.99
@@ -85,8 +85,8 @@ class Decaf(Beverage):
     Café Descafeinado, un tipo específico de bebida.
     """
 
-    def __init__(self):
-        super().__init__("Café Descafeinado", "Tall")
+    def __init__(self, size: str):
+        super().__init__("Café Descafeinado", size)
 
     def cost(self) -> float:
         return 1.05
@@ -97,8 +97,8 @@ class Espresso(Beverage):
     Café Espresso, un tipo específico de bebida.
     """
 
-    def __init__(self):
-        super().__init__("Café Espresso", "Tall")
+    def __init__(self, size: str):
+        super().__init__("Café Espresso", size)
 
     def cost(self) -> float:
         return 1.99
