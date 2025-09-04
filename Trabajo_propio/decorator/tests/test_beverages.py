@@ -2,13 +2,13 @@
 Testing correspondiente a la clase Beverage y sus subclases.
 """
 
-import pytest
-import sys
 import os
+import sys
+
+import pytest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from beverages import Espresso, HouseBlend, DarkRoast, Decaf, Beverage
-
+from beverages import Beverage, DarkRoast, Decaf, Espresso, HouseBlend
 
 # ========== TESTS BÁSICOS DE BEBIDAS ==========
 
@@ -19,7 +19,7 @@ class TestBeverageBasics:
     @pytest.mark.parametrize(
         "beverage_class,expected_description,expected_cost",
         [
-            (Espresso, "Espresso", 1.99),
+            (Espresso, "Café Espresso", 1.99),
             (HouseBlend, "Café de la Casa", 0.89),
             (DarkRoast, "Café Dark Roast", 0.99),
             (Decaf, "Café Descafeinado", 1.05),
@@ -29,23 +29,17 @@ class TestBeverageBasics:
         self, beverage_class, expected_description, expected_cost
     ):
         """Test parametrizado que verifica descripción y costo de cada bebida"""
-        beverage = beverage_class()
+        beverage = beverage_class(size="Tall")
 
         assert beverage.get_description() == expected_description
         assert beverage.cost() == expected_cost
-
-    @pytest.mark.parametrize("beverage_class", [Espresso, HouseBlend, DarkRoast, Decaf])
-    def test_beverage_should_start_with_tall_size_when_created(self, beverage_class):
-        """Test que verifica que todas las bebidas inician con tamaño Tall"""
-        beverage = beverage_class()
-        assert beverage.get_size() == "Tall"
 
     @pytest.mark.parametrize("beverage_class", [Espresso, HouseBlend, DarkRoast, Decaf])
     def test_beverage_subtype_should_be_instance_of_beverage_when_created(
         self, beverage_class
     ):
         """Test que verifica que todas las bebidas son instancias de Beverage"""
-        beverage = beverage_class()
+        beverage = beverage_class(size="Tall")
         assert isinstance(beverage, Beverage)
 
 
@@ -61,7 +55,7 @@ class TestBeverageSizes:
         self, beverage_class, size
     ):
         """Test parametrizado que verifica que se puede modificar el tamaño de cualquier bebida"""
-        beverage = beverage_class()
+        beverage = beverage_class(size="Tall")
         beverage.set_size(size)
         assert beverage.get_size() == size
 
@@ -74,7 +68,7 @@ class TestBeverageSizes:
         self, beverage_class, invalid_size
     ):
         """Test parametrizado que verifica que no se puede usar un tamaño inválido"""
-        beverage = beverage_class()
+        beverage = beverage_class(size="Tall")
         with pytest.raises(ValueError, match="Tamaño no disponible"):
             beverage.set_size(invalid_size)
 
@@ -83,6 +77,6 @@ class TestBeverageSizes:
         self, beverage_class
     ):
         """Test que verifica que todas las bebidas devuelven los tamaños disponibles correctos"""
-        beverage = beverage_class()
+        beverage = beverage_class(size="Tall")
         expected_sizes = ["Tall", "Grande", "Venti"]
         assert beverage.get_available_sizes() == expected_sizes

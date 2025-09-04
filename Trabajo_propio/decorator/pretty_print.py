@@ -1,10 +1,12 @@
-# Pretty_Print.py
-# Contiene el metodo para que la salida cuando se repiten condimentos sea double triple o nx.
+"""
+Contiene el metodo para que la salida cuando se repiten condimentos sea double triple o nx.
+"""
 
-def impresion( description) -> str:
-    #print(description)
+def pretty_print( description) -> str:
+    """
+    Función útil para formatear la descripción de la bebida y sus condimentos.
+    """
     lista = description.split(", ")
-    #print(lista)
     unicos= list(dict.fromkeys(lista[1:]))
     texto = lista[0]
     for i in unicos:

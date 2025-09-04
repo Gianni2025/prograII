@@ -1,10 +1,27 @@
 
+# Ignorar archivos y directorios generados por el usuario
 !*/
 *.Rcheck/
 **/__pycache__/
 .cache/
 .pytest_cache/
 .mypy_cache/
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
 
 # Directorios y archivos de entornos virtuales
 .env
@@ -34,3 +51,22 @@ share/python-wheels/
 MANIFEST
 uv.lock
 .bevel/do_not_share
+
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+.ionide

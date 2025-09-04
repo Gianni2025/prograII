@@ -1,10 +1,10 @@
-# beverages.py
-# Contiene el Componente y los Componentes Concretos del patrón.
+"""
+Módulo que contiene a las bebidas pertenecientes al café.
+""" 
 
 from abc import ABC, abstractmethod
 
 
-# --- Componente Abstracto ---
 class Beverage(ABC):
     """
     La clase base para todas las bebidas. Utiliza el módulo abc para
@@ -16,9 +16,6 @@ class Beverage(ABC):
         self.description = description
         self.size = size
 
-
-    """ def pretty_print(self)-> str:
-        return self.description """
 
     def get_description(self) -> str:
         """
@@ -59,14 +56,13 @@ class Beverage(ABC):
         pass
 
 
-# --- Componentes Concretos ---
 class HouseBlend(Beverage):
     """
     Café de la casa, un tipo específico de bebida.
     """
 
-    def __init__(self):
-        super().__init__("Café de la Casa", "Tall")
+    def __init__(self, size: str):
+        super().__init__("Café de la Casa", size)
 
     def cost(self) -> float:
         return 0.89
@@ -77,8 +73,8 @@ class DarkRoast(Beverage):
     Café Dark Roast, un tipo específico de bebida.
     """
 
-    def __init__(self):
-        super().__init__("Café Dark Roast", "Tall")
+    def __init__(self, size: str):
+        super().__init__("Café Dark Roast", size)
 
     def cost(self) -> float:
         return 0.99
@@ -89,8 +85,8 @@ class Decaf(Beverage):
     Café Descafeinado, un tipo específico de bebida.
     """
 
-    def __init__(self):
-        super().__init__("Café Descafeinado", "Tall")
+    def __init__(self, size: str):
+        super().__init__("Café Descafeinado", size)
 
     def cost(self) -> float:
         return 1.05
@@ -101,8 +97,8 @@ class Espresso(Beverage):
     Café Espresso, un tipo específico de bebida.
     """
 
-    def __init__(self):
-        super().__init__("Espresso", "Tall")
+    def __init__(self, size: str):
+        super().__init__("Café Espresso", size)
 
     def cost(self) -> float:
         return 1.99
