@@ -4,7 +4,7 @@ Script principal para probar el patrón Decorator.
 
 from pretty_print import pretty_print
 from builder import build_beverage
-
+from tests import tests
 
 def main():
     """

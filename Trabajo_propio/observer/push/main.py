@@ -1,4 +1,4 @@
-from Subject_push import WeatherData
+from subject_push import WeatherData
 from displays_push import CurrentConditionsDisplay, StatisticsDisplay, ForecastDisplay
 
 def main():

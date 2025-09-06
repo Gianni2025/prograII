@@ -2,7 +2,7 @@
 Ejecución de flujo principal de la aplicación
 """
 
-from Subject import WeatherData
+from subject import WeatherData
 from displays import CurrentConditionsDisplay, StatisticsDisplay, ForecastDisplay
 
 
