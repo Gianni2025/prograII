@@ -16,6 +16,7 @@ python -m factory.abstract_factory.main
 
 **Analiza la salida de cada comando.** Nota las diferencias en la preparación y los ingredientes entre las pizzas de Nueva York y Chicago en la versión final (`abstract_factory`).
 
+Según el Store cambian los ingredientes para un mismo tipo de pizza
 python -m factory.abstract_factory.main
     Preparing NY Style Cheese Pizza
     -> Thin Crust Dough / Marinara Sauce / Reggiano Cheese
@@ -34,41 +35,21 @@ La pizzería quiere ampliar su menú. Tu primera tarea es agregar las variedades
 
 1.  **Crea las clases de producto concretas:**
 
-    **Hecho!!!**
-
       * En `factory/factory_method/pizzas.py`, crea las clases `NYStyleVeggiePizza`, `NYStylePepperoniPizza`, `ChicagoStyleVeggiePizza` y `ChicagoStylePepperoniPizza`.
       * Inspírate en las clases `...CheesePizza` existentes para definir sus ingredientes (masa, salsa, toppings).
 
 2.  **Actualiza los Concrete Creators:**
 
-    **Hecho!!!**
-
       * En `factory/factory_method/stores.py`, modifica los métodos `create_pizza` de `NYPizzaStore` y `ChicagoPizzaStore` para que puedan instanciar las nuevas variedades de pizza cuando se les pasa el `kind` "veggie" o "pepperoni".
 
 3.  **Verifica tu implementación:**
-    
-    **Hecho!!!**
-    
+
       * Modifica `factory/factory_method/main.py` para ordenar las nuevas pizzas y comprueba que se crean correctamente.
 
-### Paso 2: Extender el Patrón Abstract Factory
-
-Ahora, harás lo mismo pero en la versión más compleja, que utiliza **Abstract Factory** para gestionar los ingredientes. El objetivo es asegurar que las nuevas pizzas también usen ingredientes consistentes con su región.
-
-1.  **Define los nuevos productos de ingredientes:**
-    
-    **Hecho!!!**
-      * En `factory/abstract_factory/ingredients.py`, crea las clases para los nuevos ingredientes que necesitarás, como `Veggies` y `Pepperoni` (puedes crear clases abstractas y luego concretas como `Onion`, `Mushroom`, `SlicedPepperoni`, etc.).
-
-2.  **Actualiza la interfaz de la fábrica abstracta:**
-
-      * En el mismo archivo, agrega nuevos métodos abstractos a `PizzaIngredientFactory` para crear los nuevos tipos de ingredientes (ej: `create_veggies()` y `create_pepperoni()`).
-
-3.  **Actualiza las fábricas concretas:**
-
-      * Implementa los nuevos métodos en `NYPizzaIngredientFactory` y `ChicagoPizzaIngredientFactory`, devolviendo las familias de ingredientes correctas para cada región.
-
 **Nuevas pizzas de factory_method**
+
+Se realizaron todas las modificaciones necesarias en los distintos archivos del factory_method y se muestra la salida para los nuevos tipos de pizza
+
       PS C:\Users\Toshiba\Documents\prograII\Trabajo_propio> python -m factory.factory_method.main
       Preparing NY Style Veggie Cheese
       Adding toppings: Shredded Veggie Cheese, Onion, Mushroom
@@ -99,6 +80,23 @@ Ahora, harás lo mismo pero en la versión más compleja, que utiliza **Abstract
       Michael ordered: Chicago Style Veggie Cheese
       -----------
 
+### Paso 2: Extender el Patrón Abstract Factory
+
+Ahora, harás lo mismo pero en la versión más compleja, que utiliza **Abstract Factory** para gestionar los ingredientes. El objetivo es asegurar que las nuevas pizzas también usen ingredientes consistentes con su región.
+
+1.  **Define los nuevos productos de ingredientes:**
+    
+    **Hecho!!!**
+      * En `factory/abstract_factory/ingredients.py`, crea las clases para los nuevos ingredientes que necesitarás, como `Veggies` y `Pepperoni` (puedes crear clases abstractas y luego concretas como `Onion`, `Mushroom`, `SlicedPepperoni`, etc.).
+
+2.  **Actualiza la interfaz de la fábrica abstracta:**
+
+      * En el mismo archivo, agrega nuevos métodos abstractos a `PizzaIngredientFactory` para crear los nuevos tipos de ingredientes (ej: `create_veggies()` y `create_pepperoni()`).
+
+3.  **Actualiza las fábricas concretas:**
+
+      * Implementa los nuevos métodos en `NYPizzaIngredientFactory` y `ChicagoPizzaIngredientFactory`, devolviendo las familias de ingredientes correctas para cada región.
+
 4.  **Crea las nuevas clases de Pizza:**
 
       * En `factory/abstract_factory/pizzas.py`, crea las clases `VeggiePizza` y `PepperoniPizza`.
@@ -109,6 +107,8 @@ Ahora, harás lo mismo pero en la versión más compleja, que utiliza **Abstract
       * Finalmente, en `factory/abstract_factory/store.py`, modifica `NYPizzaStore` y `ChicagoPizzaStore` para que puedan crear instancias de `VeggiePizza` y `PepperoniPizza`.
 
 **Nuevas pizzas de abstract_factory**
+
+Se realizaron todas las modificaciones necesarias en los distintos archivos del abstract_factory y se muestra la salida para los nuevos tipos de pizza
 
       PS C:\Users\Toshiba\Documents\prograII\Trabajo_propio> python -m factory.abstract_factory.main
       Preparing NY Style Veggie Pizza
