@@ -16,18 +16,22 @@ python -m factory.abstract_factory.main
 
 **Analiza la salida de cada comando.** Nota las diferencias en la preparación y los ingredientes entre las pizzas de Nueva York y Chicago en la versión final (`abstract_factory`).
 
+```
 Según el Store cambian los ingredientes para un mismo tipo de pizza
+
 python -m factory.abstract_factory.main
+
     Preparing NY Style Cheese Pizza
-    -> Thin Crust Dough / Marinara Sauce / Reggiano Cheese
+    -> <span style="color:red;">Thin Crust Dough / Marinara Sauce / Reggiano Cheese</span>
     Bake 25 min at 350
     Cutting pizza into diagonal slices
     Place pizza in official box
     Preparing Chicago Style Clam Pizza
-    -> Thick Crust Dough / Plum Tomato Sauce / Mozzarella Cheese / Frozen Clams
+    -> <span style="color:red;">Thick Crust Dough / Plum Tomato Sauce / Mozzarella Cheese / Frozen Clams</span>
     Bake 25 min at 350
     Cutting pizza into diagonal slices
     Place pizza in official box
+```
 
 ### Paso 1: Extender el Patrón Factory Method
 
