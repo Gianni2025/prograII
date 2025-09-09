@@ -4,44 +4,30 @@ import pytest
 import sys
 import os
 
-
-""" 1.  **Crea un archivo de pruebas:** Por ejemplo, `factory/abstract_factory/test_pizzas.py`.
-
-2.  **Escribe entre 3 y 5 pruebas** que verifiquen los siguientes escenarios en la implementación de **Abstract Factory**:
-
-      * Que `NYPizzaStore` efectivamente crea una pizza de tipo `NYStyle...`.
-      * Que `ChicagoPizzaStore` crea una pizza de tipo `ChicagoStyle...`.
-      * Que una pizza de queso de NY (`CheesePizza` creada por `NYPizzaStore`) contiene los ingredientes correctos de NY (ej: `Thin Crust Dough`).
-      * Que una pizza de almejas de Chicago (`ClamPizza` creada por `ChicagoPizzaStore`) contiene los ingredientes correctos de Chicago (ej: `Frozen Clams`).
-
-    **Pista para las pruebas:** Puedes instanciar una tienda, ordenar una pizza y luego usar `isinstance` para verificar el tipo de los ingredientes.
-Testing correspondiente al abstract factory
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-"""
-
-
-# ========== TESTS BÁSICOS DE STORE ==========
-
-
+# ========== TESTS BÁSICOS DE STORE Y USO DIFERENCIAL INGREDIENTES ==========
 
 class TestStores:
     """Tests para verificar la creacion de los dos stores NY y Chicago
-
-    def test_ny_cheese_pizza_has_correct_dough(self):
-        pizza = NYPizzaStore().order_pizza("cheese")
-        assert (pizza.dough == "Thin Crust Dough")
-""" 
- #   @pytest.mark.parametrize(
-
-  ##          "store,  nombre", [(NYPizzaStore, "cheese"), (ChicagoPizzaStore,  "Cheese")]
-           
-   # )
-    def test_cheese_pizza_has_correct_dough_store(self):
-        ny = NYPizzaStore()
-        pizza = ny.order_pizza("clam"); 
-        assert ("NY Style"  in str(pizza))
-
-    def test_cheese_pizza_has_correct_dough_store(self):
-        chi = ChicagoPizzaStore()
-        pizza = chi.order_pizza("clam"); 
-        assert ("Chicago"  in str(pizza))
+        y el uso diferencial de masa y clams
+    """ 
+    @pytest.mark.parametrize(
+    "store,  texto, dough, clams", 
+    [(NYPizzaStore,"NY Style", "Thin Crust Dough", "Fresh Clams"), 
+     (ChicagoPizzaStore,  "Chicago Style","Thick Crust Dough", "Frozen Clams")]
+     )
+    def test_clams_pizza_has_correct_clams_dough_and_store(self, store, texto, dough, clams):
+        pizza = store().order_pizza("clam"); 
+        assert (texto  in str(pizza))
+        assert (dough in str(pizza.dough))
+        assert (clams in str(pizza.clam))
+        
+    @pytest.mark.parametrize(
+    "store, texto, cheeses", 
+    [(NYPizzaStore, "NY Style", "Reggiano Cheese" ), 
+     (ChicagoPizzaStore,  "Chicago Style", "Mozzarella Cheese")]
+     )
+    def test_cheese_pizza_has_correct_cheese_and_store(self, store, texto, cheeses):
+        pizza = store().order_pizza("cheese"); 
+        assert (texto  in str(pizza))
+        assert (cheeses in str(pizza.cheese))
+            
