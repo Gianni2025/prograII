@@ -97,7 +97,7 @@ class Espresso(Beverage):
     Café Espresso, un tipo específico de bebida.
     """
 
-    def __init__(self, size: str):
+    def __init__(self, size:str):
         super().__init__("Café Espresso", size)
 
     def cost(self) -> float:
