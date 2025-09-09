@@ -151,20 +151,22 @@ La calidad es clave en Objectville. Debes escribir pruebas para asegurar que el 
 
     **Pista para las pruebas:** Puedes instanciar una tienda, ordenar una pizza y luego usar `isinstance` para verificar el tipo de los ingredientes.
 
-    ```python
-    # Ejemplo de esqueleto de prueba con pytest
-    from .store import NYPizzaStore
-    from .ingredients import ThinCrustDough
+**Hice varios test pero no pude hacerlos con isinstance, use texto in str(pizza.dough por ejemplo)**
+**IMPORTANTE**
+para correr los test con pytest tuve que posicionarme en 
+Trabajo_propio\factory (si no corre los del otro proyecto tambien e intenta correr los del factory original y da error)
+desde esa posición los comandos para correr cada una de los factories seria sin el factory inicial
 
-    def test_ny_cheese_pizza_has_correct_dough():
-        # Arrange
-        store = NYPizzaStore()
-        # Act
-        pizza = store.order_pizza("cheese")
-        # Assert
-        assert isinstance(pizza.dough, ThinCrustDough)
-    ```
+      ```bash
+      # Ejecuta la versión con Simple Factory
+      python -m simple_factory.main
 
+      # Ejecuta la versión con Factory Method
+      python -m factory_method.main
+
+      # Ejecuta la versión con Abstract Factory
+      python -m abstract_factory.main
+      ```
 -----
 
 ## 📦 Formato de Entrega
@@ -174,4 +176,4 @@ La calidad es clave en Objectville. Debes escribir pruebas para asegurar que el 
 3.  En tu propio `README.md`, escribe una breve sección (`## Decisiones de Diseño`) explicando las decisiones que tomaste y cualquier desafío que encontraste.
 4.  La entrega final será el enlace a tu repositorio de GitHub.
 
-**¡Mucha suerte y a codificar\!**
+
