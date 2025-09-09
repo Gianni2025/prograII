@@ -22,12 +22,12 @@ Según el Store cambian los ingredientes para un mismo tipo de pizza
 python -m factory.abstract_factory.main
 
     Preparing NY Style Cheese Pizza
-    -> <span style="color:red;">Thin Crust Dough / Marinara Sauce / Reggiano Cheese</span>
+    -> **Thin Crust Dough / Marinara Sauce / Reggiano Cheese**
     Bake 25 min at 350
     Cutting pizza into diagonal slices
     Place pizza in official box
     Preparing Chicago Style Clam Pizza
-    -> <span style="color:red;">Thick Crust Dough / Plum Tomato Sauce / Mozzarella Cheese / Frozen Clams</span>
+    -> **Thick Crust Dough / Plum Tomato Sauce / Mozzarella Cheese / Frozen Clams**
     Bake 25 min at 350
     Cutting pizza into diagonal slices
     Place pizza in official box
