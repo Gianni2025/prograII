@@ -22,12 +22,12 @@ Según el Store cambian los ingredientes para un mismo tipo de pizza
 python -m factory.abstract_factory.main
 
     Preparing NY Style Cheese Pizza
-    -> **Thin Crust Dough / Marinara Sauce / Reggiano Cheese**
+    -> Thin Crust Dough / Marinara Sauce / Reggiano Cheese
     Bake 25 min at 350
     Cutting pizza into diagonal slices
     Place pizza in official box
     Preparing Chicago Style Clam Pizza
-    -> **Thick Crust Dough / Plum Tomato Sauce / Mozzarella Cheese / Frozen Clams**
+    -> Thick Crust Dough / Plum Tomato Sauce / Mozzarella Cheese / Frozen Clams
     Bake 25 min at 350
     Cutting pizza into diagonal slices
     Place pizza in official box
@@ -90,7 +90,6 @@ Ahora, harás lo mismo pero en la versión más compleja, que utiliza **Abstract
 
 1.  **Define los nuevos productos de ingredientes:**
     
-    **Hecho!!!**
       * En `factory/abstract_factory/ingredients.py`, crea las clases para los nuevos ingredientes que necesitarás, como `Veggies` y `Pepperoni` (puedes crear clases abstractas y luego concretas como `Onion`, `Mushroom`, `SlicedPepperoni`, etc.).
 
 2.  **Actualiza la interfaz de la fábrica abstracta:**
@@ -161,7 +160,7 @@ para correr los test con pytest tuve que posicionarme en
 Trabajo_propio\factory (si no corre los del otro proyecto tambien e intenta correr los del factory original y da error)
 desde esa posición los comandos para correr cada una de los factories seria sin el factory inicial
 
-      ```bash
+```bash
       # Ejecuta la versión con Simple Factory
       python -m simple_factory.main
 
@@ -170,7 +169,7 @@ desde esa posición los comandos para correr cada una de los factories seria sin
 
       # Ejecuta la versión con Abstract Factory
       python -m abstract_factory.main
-      ```
+```
 -----
 
 ## 📦 Formato de Entrega
@@ -178,6 +177,9 @@ desde esa posición los comandos para correr cada una de los factories seria sin
 1.  Realiza un **fork** de este repositorio.
 2.  Trabaja en tu fork, haciendo commits a medida que completas cada paso.
 3.  En tu propio `README.md`, escribe una breve sección (`## Decisiones de Diseño`) explicando las decisiones que tomaste y cualquier desafío que encontraste.
+
+**<<<<<<<<<<< ESTO FALTA DESARROLLAR >>>>>>>>>>>** 
+
 4.  La entrega final será el enlace a tu repositorio de GitHub.
 
 

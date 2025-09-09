@@ -18,6 +18,7 @@ class NYPizzaStore(PizzaStore):
         if k=="clam":   return ClamPizza("NY Style Clam Pizza", self.factory)
         if k=="veggies":   return VeggiesPizza("NY Style Veggie Pizza", self.factory)
         if k=="pepperoni":   return PepperoniPizza("NY Style Pepperoni Pizza", self.factory)
+        if k=="mushroom":   return MushroomPizza("NY Style Mushroom Pizza", self.factory)
         raise ValueError(f"No NY pizza for kind: {kind}")
 
 class ChicagoPizzaStore(PizzaStore):
@@ -28,4 +29,5 @@ class ChicagoPizzaStore(PizzaStore):
         if k=="clam":   return ClamPizza("Chicago Style Clam Pizza", self.factory)
         if k=="veggies": return CheesePizza("Chicago Style Veggies Pizza", self.factory)
         if k=="pepperoni":   return PepperoniPizza("Chicago Style Pepperoni Pizza", self.factory)
+        if k=="mushroom":   return MushroomPizza("Chicago Style Mushroom Pizza", self.factory)
         raise ValueError(f"No Chicago pizza for kind: {kind}")
