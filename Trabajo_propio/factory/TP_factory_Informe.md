@@ -21,16 +21,18 @@ Según el Store cambian los ingredientes para un mismo tipo de pizza
 
 python -m factory.abstract_factory.main
 
-    Preparing NY Style Cheese Pizza
-    -> Thin Crust Dough / Marinara Sauce / Reggiano Cheese
-    Bake 25 min at 350
-    Cutting pizza into diagonal slices
-    Place pizza in official box
-    Preparing Chicago Style Clam Pizza
-    -> Thick Crust Dough / Plum Tomato Sauce / Mozzarella Cheese / Frozen Clams
-    Bake 25 min at 350
-    Cutting pizza into diagonal slices
-    Place pizza in official box
+      Preparing NY Style Cheese Pizza
+      -> Thin Crust Dough / Marinara Sauce / Reggiano Cheese
+      Bake 25 min at 350
+      Cutting pizza into diagonal slices
+      Place pizza in official box
+      --------
+      Preparing Chicago Style Cheese Pizza
+      -> Thick Crust Dough / Plum Tomato Sauce / Mozzarella Cheese
+      Bake 25 min at 350
+      Cutting pizza into diagonal slices
+      Place pizza in official box
+      --------
 
 
 ### Paso 1: Extender el Patrón Factory Method

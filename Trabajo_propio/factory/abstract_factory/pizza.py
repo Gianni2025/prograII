@@ -5,7 +5,6 @@ class Pizza(ABC):
     def __init__(self, name: str, ing_factory: PizzaIngredientFactory):
         self.name=name; self.f=ing_factory
         self.dough=None; self.sauce=None; self.cheese=None; self.veggie_cheese=None;  self.clam=None; self.onion=None; self.mushroom=None; self.pepperoni=None
-
     @abstractmethod
     def prepare(self): ...
     def bake(self): print("Bake 25 min at 350")
@@ -22,14 +21,14 @@ class CheesePizza(Pizza):
 class ClamPizza(Pizza):
     def prepare(self):
         print(f"Preparing {self.name}")
-        self.dough=self.f.create_dough(); self.sauce=self.f.create_sauce(); self.cheese=self.f.create_cheese(); self.clam=self.f.create_clam()
-        print(" ->", self.dough, "/", self.sauce, "/", self.cheese, "/", self.clam)
+        self.dough=self.f.create_dough(); self.sauce=self.f.create_sauce();  self.clam=self.f.create_clam()
+        print(" ->", self.dough, "/", self.sauce,  "/", self.clam)
         
 class MushroomPizza(Pizza):
     def prepare(self):
         print(f"Preparing {self.name}")
-        self.dough=self.f.create_dough(); self.sauce=self.f.create_sauce(); self.cheese=self.f.create_cheese(); self.clam=self.f.create_clam()
-        print(" ->", self.dough, "/", self.sauce, "/", self.cheese, "/", self.mushroom)
+        self.dough=self.f.create_dough(); self.sauce=self.f.create_sauce(); self.cheese=self.f.create_cheese(); self.mushroom=self.f.create_mushroom()
+        print(" ->", self.dough, "/", self.sauce,  "/", self.cheese, "/", self.mushroom)
         
 class VeggiesPizza(Pizza):
     def prepare(self):

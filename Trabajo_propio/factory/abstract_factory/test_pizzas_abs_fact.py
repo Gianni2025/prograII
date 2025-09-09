@@ -28,7 +28,7 @@ class TestStoresAbstractFactory:
      )
     def test_cheese_pizza_has_correct_cheese_and_store(self, store, texto, cheeses):
         pizza = store().order_pizza("cheese"); 
-        assert (texto  in str(pizza.store))
+        assert (texto  in str(pizza))
         assert (cheeses in str(pizza.cheese))
     
     @pytest.mark.parametrize(

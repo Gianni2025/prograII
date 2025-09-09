@@ -53,7 +53,7 @@ class NYPizzaIngredientFactory(PizzaIngredientFactory):
     def create_onion(self) -> Onion:   return Onion("Caramelized Sliced Onion")    
     def create_veggiecheese(self) -> Cheese:return VeggieCheese("Veggie Cheese")
     def create_clam(self) -> Clams:   return Clams("Fresh Clams")
-    def create_mushroom(self) -> Mushroom:   return Mushroom("Sliced mushroom")    
+    def create_mushroom(self) -> Mushroom:   return Mushroom("Sliced Girgolas")    
 #    def create_SlicedPepperoni(self) -> Pepperoni:   return Pepperoni("Sliced Pepperoni")   
 
 
