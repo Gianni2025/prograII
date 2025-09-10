@@ -23,7 +23,7 @@ def main():
     p4 = chi.order_pizza("veggie")
     print("Juliet ordered:", p4)
     print("-----------")
-    p5 = chi.order_pizza("pepperoni")
+    p5 = ny.order_pizza("pepperoni")
     print("Caroline ordered:", p5)
     print("-----------")
     p6 = chi.order_pizza("pepperoni")
