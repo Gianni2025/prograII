@@ -16,7 +16,7 @@ python -m factory.abstract_factory.main
 
 **Analiza la salida de cada comando.** Nota las diferencias en la preparación y los ingredientes entre las pizzas de Nueva York y Chicago en la versión final (`abstract_factory`).
 
-
+**<<<<<<<<<<< ESTO FALTA DESARROLLAR >>>>>>>>>>>** 
 Según el Store cambian los ingredientes para un mismo tipo de pizza
 
 python -m factory.abstract_factory.main

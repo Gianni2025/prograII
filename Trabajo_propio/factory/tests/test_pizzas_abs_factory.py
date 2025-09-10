@@ -1,8 +1,11 @@
 
-from .store import NYPizzaStore, ChicagoPizzaStore
-from .ingredients import *#PizzaIngredientFactory
+from factory.abstract_factory.store import NYPizzaStore, ChicagoPizzaStore
+from factory.abstract_factory.ingredients import *
 import pytest
-from .pizza import *
+from factory.abstract_factory.pizza import *
+
+import os
+import sys
 
 # ========== TESTS BÁSICOS DE STORE Y USO DIFERENCIAL INGREDIENTES ==========
 
@@ -33,7 +36,7 @@ class TestStoresAbstractFactory:
     
     @pytest.mark.parametrize(
     "store, tipo, clase", 
-    [(NYPizzaStore,"pepperoni",PepperoniPizza ), 
+    [(NYPizzaStore,"pepperoni", PepperoniPizza ), 
      (NYPizzaStore,"cheese",  CheesePizza),
      (ChicagoPizzaStore,"mushroom", MushroomPizza)]
      )
