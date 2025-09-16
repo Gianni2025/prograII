@@ -87,7 +87,12 @@ class TestPizzaStore:
         """Test que verifica que las pizzas tengan los toppings correctos"""
         factory = SimplePizzaFactory()
         store = PizzaStore(factory)
-
         pizza = store.order_pizza(pizza_type)
-
         assert pizza.toppings == expected_toppings
+
+def test_import_simple_factory():
+    import main as s  
+ #   from simple_factory import SimplePizzaFactory 
+ #   from store import PizzaStore
+ #   from pizza import CheesePizza, VeggiePizza, ClamPizza, PepperoniPizza
+    assert callable(s.main)

@@ -85,6 +85,7 @@ class TestIngredientFactories:
             (NYPizzaStore, "cheese"),
             (ChicagoPizzaStore, "cheese"),
             (ChicagoPizzaStore, "mushroom"),
+            (NYPizzaStore, "mushroom"),
         ],
     )
     def test_all_pizzas_should_have_required_ingredients(self, store_class, pizza_type):
@@ -119,3 +120,10 @@ class TestIngredientFactories:
         # Pero diferentes entre tiendas
         assert str(ny_pizza1.dough) != str(chicago_pizza1.dough)
         assert str(ny_pizza1.sauce) != str(chicago_pizza1.sauce)
+
+    def test_import_abstract_factory(self):   
+        import main as af 
+    #    from store import NYPizzaStore, ChicagoPizzaStore
+    #    from pizza import PepperoniPizza, CheesePizza, MushroomPizza    
+        import factory.abstract_factory.main as af
+        assert callable(af.main)  

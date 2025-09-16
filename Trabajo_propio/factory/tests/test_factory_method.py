@@ -11,14 +11,8 @@ factory_method_path = os.path.join(factory_dir, "factory_method")
 sys.path.insert(0, factory_method_path)
 
 from store import NYPizzaStore, ChicagoPizzaStore
-from pizza import (  
-    NYStyleCheesePizza,
-    ChicagoStyleCheesePizza,
-    NYStyleVeggiePizza,
-    ChicagoStyleVeggiePizza,
-    NYStylePepperoniPizza,
-    ChicagoStylePepperoniPizza,
-)
+from pizza import (NYStyleCheesePizza,  ChicagoStyleCheesePizza, NYStyleVeggiePizza,
+    ChicagoStyleVeggiePizza, NYStylePepperoniPizza,  ChicagoStylePepperoniPizza, )
 import pytest
 
 
@@ -92,3 +86,10 @@ class TestFactoryMethodStores:
         # Verificar que es una pizza de Chicago
         assert isinstance(pizza, ChicagoStyleCheesePizza)
         assert "Chicago Style" in pizza.name
+
+
+    def test_import_factory_method(self):   
+        import main as fm 
+    #    from store import NYPizzaStore, ChicagoPizzaStore
+    #    from pizza import NYStyleCheesePizza,  ChicagoStyleCheesePizza,         ChicagoStyleVeggiePizza, NYStylePepperoniPizza,  ChicagoStylePepperoniPizza
+        assert callable(fm.main)

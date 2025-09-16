@@ -2,6 +2,14 @@
 Punto de entrada para la aplicación de la pizzería.
 """
 
+import os
+import sys
+
+# Configurar paths para que los imports funcionen correctamente
+factory_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+abstract_factory_path = os.path.join(factory_dir, "abstract_factory")
+sys.path.insert(0, abstract_factory_path)
+
 from store import NYPizzaStore, ChicagoPizzaStore
 
 
